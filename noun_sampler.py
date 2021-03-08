@@ -16,7 +16,8 @@ def custom_filter_fcn(word):
 
 
 class NounSampler:
-    def __init__(self, filter_fcn=custom_filter_fcn):
+    def __init__(self, with_replacement=False, filter_fcn=custom_filter_fcn):
+        self.with_replacement = with_replacement
         self.is_valid_word = filter_fcn
         self.nouns = set()
 
@@ -46,4 +47,7 @@ class NounSampler:
         if len(self.nouns) <= num_words:
             return self.nouns
 
-        return random.sample(self.nouns, num_words)
+        res = random.sample(self.nouns, num_words)
+        if not self.with_replacement:
+            self.nouns = self.nouns.difference(set(res))
+        return res
