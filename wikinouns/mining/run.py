@@ -8,13 +8,13 @@ DATABASE_FILE = "wikinouns.db"
 def main():
     db = WordDatabase(DATABASE_FILE)
 
-    ns = NounSampler(with_replacement=False)
+    ns = NounSampler()
     ns.load_desiq()
 
-    miner = WikiMiner(sampler=ns)
+    miner = WikiMiner(ns)
     miner.add(db)
 
-    miner.start()
+    miner.start(duration=60)
 
 
 if __name__ == '__main__':

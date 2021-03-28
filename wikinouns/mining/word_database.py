@@ -1,5 +1,4 @@
 import os
-
 import sqlite3
 from sqlite3 import Error
 
@@ -21,17 +20,19 @@ class WordDatabase:
     def push(self, row):
         if self.conn is not None:
             self.__create_table(self.conn.cursor())
-
         self.__insert(self.conn.cursor(), row)
         self.conn.commit()
 
     def __create_table(self, cursor):
         sql_create = """ CREATE TABLE IF NOT EXISTS nouns (
-                        noun text PRIMARY KEY,
-                        words text NOT NULL ); """
+                            noun varchar(255) NOT NULL,
+                            content content NOT NULL,
+                            tag varchar(255),
+                            PRIMARY KEY (noun) ); """
+
         cursor.execute(sql_create)
 
     def __insert(self, cursor, datum):
-        sql_insert = """ INSERT INTO nouns(noun, words)
-                        VALUES(?,?) """
+        sql_insert = """ INSERT INTO nouns(noun, content, tag)
+                        VALUES(?,?,?) """
         cursor.execute(sql_insert, datum)
