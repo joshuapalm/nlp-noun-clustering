@@ -2,7 +2,7 @@ from wiki_miner import WikiMiner
 from word_database import WordDatabase
 from noun_sampler import NounSampler
 
-DATABASE_FILE = "wikinouns.db"
+DATABASE_FILE = "../wikinouns.db"
 
 
 def main():
@@ -14,7 +14,7 @@ def main():
     miner = WikiMiner(ns)
     miner.add(db)
 
-    miner.start(duration=60)
+    miner.start(duration=3600)
 
 
 if __name__ == '__main__':
