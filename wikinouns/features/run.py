@@ -29,7 +29,7 @@ def main():
         rows.append(features)
 
     df = pd.DataFrame(rows).fillna(0)
-    df.to_csv(FEATURE_FILE)
+    df.to_csv(FEATURE_FILE, index=False)
 
 
 if __name__ == '__main__':
